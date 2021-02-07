@@ -5,7 +5,7 @@ public class Money {
 
     protected String currency;
 
-    protected Money(int amount, String currency){
+    Money(int amount, String currency){
         this.amount = amount;
         this.currency = currency;
     }
@@ -29,7 +29,8 @@ public class Money {
     @Override
     public boolean equals(Object obj) {
         Money money = (Money) obj;
-        return amount == money.getAmount()
-                && this.currency.equals(money.currency);
+        return getClass().equals(money.getClass())
+            && amount == money.getAmount()
+            && this.currency.equals(money.currency);
     }
 }
