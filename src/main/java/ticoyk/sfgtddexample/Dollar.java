@@ -1,15 +1,14 @@
 package ticoyk.sfgtddexample;
 
 public class Dollar {
-    int amount;
+    public final int amount;
 
-    Dollar(){ }
     Dollar(int amount){
         this.amount = amount;
     }
 
-    public void times(int value){
-        this.amount*= value;
+    public Dollar times(int value){
+        return new Dollar(this.amount * value);
     }
 
 }
