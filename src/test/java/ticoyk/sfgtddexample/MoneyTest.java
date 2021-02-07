@@ -22,18 +22,4 @@ public class MoneyTest {
         assertEquals(false, Money.dollar(5).equals(Money.real(5)));
     }
 
-    @Test
-    void testMultiplicationReal() {
-        Money myMoney = Money.real(5);
-        Money product = myMoney.times(2);
-        assertEquals(5, myMoney.getAmount());
-        assertEquals(10, product.getAmount());
-    }
-
-    @Test
-    void testEqualityReal() {
-        assertEquals(true, Money.real(5).equals(Money.real(5)));
-        assertEquals(false, Money.real(8).equals(Money.real(5)));
-    }
-
 }
