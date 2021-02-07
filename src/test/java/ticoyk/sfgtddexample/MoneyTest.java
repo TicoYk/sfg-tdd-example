@@ -3,7 +3,7 @@ package ticoyk.sfgtddexample;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MoneyTest {
 
@@ -17,9 +17,9 @@ public class MoneyTest {
 
     @Test
     void testEqualityDollar() {
-        assertEquals(true, Money.dollar(5).equals(Money.dollar(5)));
-        assertEquals(false, Money.dollar(8).equals(Money.dollar(5)));
-        assertEquals(false, Money.dollar(5).equals(Money.real(5)));
+        assertEquals(Money.dollar(5), Money.dollar(5));
+        assertNotEquals(Money.dollar(5), Money.dollar(8));
+        assertNotEquals(Money.real(5), Money.dollar(5));
     }
 
 }
