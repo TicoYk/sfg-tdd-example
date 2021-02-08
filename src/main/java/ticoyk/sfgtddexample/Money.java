@@ -1,17 +1,17 @@
 package ticoyk.sfgtddexample;
 
-public class Money {
-    protected int amount;
+public class Money implements Expression {
 
+    protected int amount;
     protected String currency;
 
-    Money(int amount, String currency){
+    public Money(int amount, String currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
-    public Money times(int multiplier){
-        return new Money(amount * multiplier, currency);
+    protected String currency() {
+        return currency;
     }
 
     public static Money dollar(int amount){
@@ -22,15 +22,33 @@ public class Money {
         return new Money(amount, "BRL");
     }
 
-    public int getAmount(){
-        return this.amount;
+    public boolean equals(Object object) {
+        Money money = (Money) object;
+        return amount == money.amount
+                && this.currency == money.currency;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        Money money = (Money) obj;
-        return getClass().equals(money.getClass())
-            && amount == money.getAmount()
-            && this.currency.equals(money.currency);
+    public Money reduce(Bank bank, String to){
+        return new Money(amount / bank.rate(this.currency, to), to);
     }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "amount=" + amount +
+                ", currency='" + currency + '\'' +
+                '}';
+    }
+
+    @Override
+    public Expression times(int multiplier) {
+        return new Money(amount * multiplier, this.currency);
+    }
+
+    @Override
+    public Expression plus(Expression addend){
+        return new Sum(this, addend);
+    }
+
 }
